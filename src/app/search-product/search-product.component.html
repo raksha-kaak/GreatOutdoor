@@ -33,7 +33,7 @@
                         <td>{{model.productCategory}}</td>
                         <td>{{model.productName}}</td>
                         <td>{{model.productQuantity}}</td>
-                        <td>{{model.totalAmount}}</td>
+                        <td>{{model.totalAmount | currency:"₹"}}</td>
                         <td>{{model.productReceiveTimeStamp | timeStampToTime}}</td>
                         <td>{{model.productReceiveTimeStamp | timeStampToDate | date}}</td>
                     </tr>
