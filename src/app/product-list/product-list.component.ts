@@ -27,16 +27,16 @@ export class ProductListComponent implements OnInit {
 
 
   goToAddProduct(){
-    this.router.navigate(['addProduct'])
+    this.router.navigate(['product/new'])
   }
-  goToDeleteProduct(){
-    this.router.navigate(['deleteProduct'])
+  goToDeleteProduct(productId){
+    this.router.navigate(['product/delete',productId])
   }
   goToSearchProduct(){
-    this.router.navigate(['searchProduct'])
+    this.router.navigate(['product/search'])
   }
-  goToUpdateProduct(){
-    this.router.navigate(['updateProduct'])
+  goToUpdateProduct(productId){
+    this.router.navigate(['product/update',productId])
   }
 
 }

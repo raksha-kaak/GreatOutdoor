@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Product} from '../model/product';
 import {ProductServiceService} from '../service/product-service.service';
-import {Router} from '@angular/router';
+import {Router, ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-update-product',
@@ -25,21 +25,22 @@ export class UpdateProductComponent implements OnInit {
   id:number;
   productId:string;
 
-  constructor(private service:ProductServiceService,private router:Router) { 
+  constructor(private service:ProductServiceService,private router:Router,private route:ActivatedRoute) { 
     this.model= new Product();
   }
 
   ngOnInit(): void {
-  }
-
-  findById(){
-    this.submitted=true; 
-    
-    this.service.findProductById(this.productId).subscribe(
+  this.route.params.subscribe((params)=>{
+    this.service.findProductById(params.productId).subscribe(
       (data)=>{
         this.dataFound=true;
         this.model=data;
-        this.popupForm=true;
+        let productReceiveDate=new Date(data.productReceiveTimeStamp)
+        this.model.productReceiveDate=productReceiveDate;
+        this.model.productSaleDate=new Date(data.productSaleTimeStamp)
+        this.model.productReceiveTime=this.model.productReceiveDate.toTimeString().split(" ")[0]
+        this.model.productSaleTime=this.model.productSaleDate.toTimeString().split(" ")[0]
+        this.popupForm=true; 
         console.log(this.model);
       },
       (err)=>{
@@ -48,17 +49,38 @@ export class UpdateProductComponent implements OnInit {
         setTimeout(()=>this.dataNotFound=false,3000);
       }
     )
+
+
+
+  })
+  
+  }
+
+  findById(){
+    this.submitted=true; 
+    
+    
   }
     
   updateProduct(){
     this.updateButtonSubmit=true;
-
     let productRecieveDate=new Date(this.model.productReceiveDate);
+    console.log(productRecieveDate);
+    
     let time=this.model.productReceiveTime.split(":")
     productRecieveDate.setHours(Number.parseInt(time[0]))
     productRecieveDate.setMinutes(Number.parseInt(time[1]))
     console.log(productRecieveDate)
     this.model.productReceiveTimeStamp=productRecieveDate.getTime();
+
+    let productSaleDate=new Date(this.model.productSaleDate);
+    let sTime=this.model.productSaleTime.split(":")
+    productSaleDate.setHours(Number.parseInt(sTime[0]))
+    productSaleDate.setMinutes(Number.parseInt(sTime[1]))
+    console.log(productSaleDate)
+    this.model.productSaleTimeStamp=productSaleDate.getTime();
+    console.log(this.model);
+    
     
     if(this.model!=null){
       this.service.updateProduct(this.model).subscribe(
@@ -78,6 +100,6 @@ export class UpdateProductComponent implements OnInit {
 
   onSubmit() {
     alert('PRODUCT UPDATED SUCCESSFULLY :-)' );
-    this.router.navigate(['viewAllProducts']);
+    this.router.navigate(['product/view']);
   }
 }

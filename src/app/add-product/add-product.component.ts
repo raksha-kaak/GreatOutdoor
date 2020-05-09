@@ -28,6 +28,13 @@ export class AddProductComponent implements OnInit {
     productRecieveDate.setMinutes(Number.parseInt(time[1]))
     console.log(productRecieveDate)
     this.model.productReceiveTimeStamp=productRecieveDate.getTime();
+
+    let productSaleDate=new Date(this.model.productSaleDate);
+    let sTime=this.model.productSaleTime.split(":")
+    productSaleDate.setHours(Number.parseInt(sTime[0]))
+    productSaleDate.setMinutes(Number.parseInt(sTime[1]))
+    console.log(productSaleDate)
+    this.model.productSaleTimeStamp=productSaleDate.getTime();
   
     let orb=this.service.addProduct(this.model);
       orb.subscribe((data)=>
@@ -39,7 +46,7 @@ export class AddProductComponent implements OnInit {
 
   onSubmit() {
     alert('PRODUCT ADDED SUCCESSFULLY :-)' );
-    this.router.navigate(['viewAllProducts']);
+    this.router.navigate(['product/view']);
   }
 
   // addProduct(){

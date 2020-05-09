@@ -9,10 +9,11 @@
 </div>
 </div>
 <ng-container *ngIf="productList.length>0">
-<div class="card mt-5" style="margin:auto; width: 910px;">
+<div class="card mt-5" style="margin:auto; ">
     <mat-card fxFlex="50">
     <table class="table table-sum" style="border: 1px;">
       <thead class="table-primary">
+        <th>Retailer Id</th>
         <th>Product Id</th>
         <th>Product Category</th>
         <th>Product Name</th>
@@ -20,20 +21,25 @@
         <th>Total Amount</th>
         <th>Product Receive Time</th>
         <th>Product Receive Date</th>
+        <th>Product Sale Time</th>
+        <th>Product Sale Date</th>
         <th>Delete Product</th>
         <th>Update Product</th>
       </thead>
       <ng-container *ngFor="let item of productList; let i=index">
           <tr >
+            <td>{{item.retailerId}}</td>
             <td>{{item.productId}}</td>
             <td>{{item.productCategory}}</td>
             <td>{{item.productName}}</td>
             <td>{{item.productQuantity}}</td>
             <td>{{item.totalAmount | currency:"₹"}}</td>
-            <td>{{item.productReceiveTimeStamp  | timeStampToTime }}</td>
+            <td>{{item.productReceiveTimeStamp | timeStampToTime }}</td>
             <td>{{item.productReceiveTimeStamp | timeStampToDate | date}}</td>
-            <td><button type="submit" class="btn btn-primary"   (click)="goToDeleteProduct()">Delete</button></td>
-            <td><button type="submit" class="btn btn-primary"  (click)="goToUpdateProduct()">Update</button></td>
+            <td>{{item.productSaleTimeStamp | timeStampToTime }}</td>
+            <td>{{item.productSaleTimeStamp | timeStampToDate | date}}</td>
+            <td><button type="submit" class="btn btn-primary"   (click)="goToDeleteProduct(item.productId)">Delete</button></td>
+            <td><button type="submit" class="btn btn-primary"  (click)="goToUpdateProduct(item.productId)">Update</button></td>
           </tr>
     
       </ng-container>

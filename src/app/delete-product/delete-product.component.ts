@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Product} from '../model/product';
 import {ProductServiceService} from '../service/product-service.service';
-import {Router} from '@angular/router';
+import {Router, ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-delete-product',
@@ -18,15 +18,13 @@ export class DeleteProductComponent implements OnInit {
   deletedSuccess:boolean;
   deleteButtonSubmit:boolean;
   //productList:Product[];
-  constructor(private service:ProductServiceService,private router:Router) { }
+  constructor(private service:ProductServiceService,private router:Router,private route:ActivatedRoute) {
+    this.model= new Product();
+   }
 
   ngOnInit(): void {
-  }
-
-  findById(){
-    this.submitted=true; 
-    
-      this.service.findProductById(this.productId).subscribe(
+    this.route.params.subscribe((params)=>{
+      this.service.findProductById(params.productId).subscribe(
         (data)=>{
           this.dataFound=true;
           this.model=data;
@@ -38,6 +36,27 @@ export class DeleteProductComponent implements OnInit {
           setTimeout(()=>this.dataNotFound=false,3000);
         }
       )
+  
+  
+  
+    })
+  }
+
+  findById(){
+    this.submitted=true; 
+    
+      // this.service.findProductById(this.productId).subscribe(
+      //   (data)=>{
+      //     this.dataFound=true;
+      //     this.model=data;
+      //     console.log(this.model);
+      //   },
+      //   (err)=>{
+      //     this.dataNotFound=true;
+      //     this.dataFound=false;
+      //     setTimeout(()=>this.dataNotFound=false,3000);
+      //   }
+      // )
   }
 
   deleteProductById(){
@@ -50,7 +69,7 @@ export class DeleteProductComponent implements OnInit {
           this.deletedSuccess=true;
           setTimeout(()=>this.deletedSuccess=false,3000);
           alert('PRODUCT DELETED SUCCESSFULLY :-)' );
-          this.router.navigate(['viewAllProducts']);
+          this.router.navigate(['product/view']);
         }
       )
     }

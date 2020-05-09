@@ -13,11 +13,11 @@ import {AboutComponent} from './about/about.component';
 const routes: Routes = [
   {path:'home',component:HomeComponent},
   {path:'about',component:AboutComponent},
-  {path:'addProduct',component:AddProductComponent},
-  {path:'deleteProduct',component:DeleteProductComponent},
-  {path:'searchProduct',component:SearchProductComponent},
-  {path:'updateProduct',component:UpdateProductComponent},
-  {path:'viewAllProducts',component:ProductListComponent},
+  {path:'product/new',component:AddProductComponent},
+  {path:'product/delete/:productId',component:DeleteProductComponent},
+  {path:'product/search',component:SearchProductComponent},
+  {path:'product/update/:productId',component:UpdateProductComponent},
+  {path:'product/view',component:ProductListComponent},
   { path: '',   redirectTo: 'home', pathMatch: 'full' },
   { path: '**', component: HomeComponent },
 ];

@@ -38,7 +38,7 @@ export class SearchProductComponent implements OnInit {
       )
   }
   goBack(){
-    this.router.navigate(['viewAllProducts']);
+    this.router.navigate(['product/view']);
   }
 
   

@@ -19,6 +19,7 @@
             <mat-card >  
             <table class="table table-sum" style="border: 1px;">
                 <thead class="table-primary">
+                    <th>Retailer Id</th>
                     <th>Product Id</th>
                     <th>Product Category</th>
                     <th>Product Name</th>
@@ -26,9 +27,12 @@
                     <th>Total Amount(₹)</th>
                     <th>Product Receive Time</th>
                     <th>Product Receive Date</th>
+                    <th>Product Sale Time</th>
+                    <th>Product Sale Date</th>
                 </thead>
                 <ng-container>
                     <tr >
+                        <td>{{model.retailerId}}</td>
                         <td>{{model.productId}}</td>
                         <td>{{model.productCategory}}</td>
                         <td>{{model.productName}}</td>
@@ -36,8 +40,10 @@
                         <td>{{model.totalAmount | currency:"₹"}}</td>
                         <td>{{model.productReceiveTimeStamp | timeStampToTime}}</td>
                         <td>{{model.productReceiveTimeStamp | timeStampToDate | date}}</td>
+                        <td>{{model.productSaleTimeStamp | timeStampToTime }}</td>
+                        <td>{{model.productSaleTimeStamp | timeStampToDate | date}}</td>
                     </tr>
-                </ng-container>
+                </ng-container> 
               
               </table>
               <button mat-raised-button color="primary"  type="submit" (click)="goBack()">Go Back</button>
