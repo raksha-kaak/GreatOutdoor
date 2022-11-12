@@ -1,4 +1,5 @@
 # GreatOutdoors
+Worked as a Developer for a fictitious company called Great Outdoors and created an entire website from scratch along with my team to promote and sell good quality gear for outdoor activities and expand the customer base worldwide.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.4.
 
